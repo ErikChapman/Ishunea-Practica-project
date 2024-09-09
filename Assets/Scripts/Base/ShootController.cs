@@ -12,17 +12,24 @@ public class ShootController : ObjectPool<Bullet>
     public void Shoot()
     {
         if (!CheckPrefab()) return;
-        
+
         if (_shootCount >= _shootPoints.Count)
             _shootCount = 0;
-        
+
         var pooledObject = GetFromPool();
+
+        // Устанавливаем позицию пули
         pooledObject.transform.position = _shootPoints?[_shootCount].position ?? transform.position;
-        
+
+        // Устанавливаем вращение пули на 90 градусов по оси Z
+        pooledObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        // Производим выстрел
         _poolDictionary[pooledObject].Shoot(transform.up, _bulletPower);
+
         _shootCount++;
     }
-    
+
 }
 
 public interface IObjectPool<T> where T : IPolledObject
