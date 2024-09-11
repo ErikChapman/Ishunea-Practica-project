@@ -1,79 +1,71 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomSpawn : MonoBehaviour
+public class RandomSpawner : MonoBehaviour
 {
-    public GameObject[] balls;
-    public List<Transform> spawnPoints;
-    public float[] spawnIntervals; // Интервалы спауна для каждого шара
-    public float distanceBelowPlayer = 30f; // Расстояние ниже игрока для удаления астероидов
+    public GameObject[] prefabsToSpawn; // Массив префабов для спавна
+    public Transform[] spawnPoints; // Точки спавна
+    public float minSpawnInterval = 1f; // Минимальный интервал между спавнами
+    public float maxSpawnInterval = 5f; // Максимальный интервал между спавнами
+    public float destroyDistance = 10f; // Расстояние для удаления объекта ниже игрока
+    public float spawnHeightThreshold = 0f; // Высота, после пересечения которой начнётся спавн
 
-    private List<Transform> originalSpawnPoints;
     private GameObject player;
 
     private void Start()
     {
-        originalSpawnPoints = new List<Transform>(spawnPoints);
-        player = GameObject.FindGameObjectWithTag("Player"); // Найти игрока по тегу
-        StartCoroutine(SpawnBalls());
-    }
-
-    IEnumerator SpawnBalls()
-    {
-        while (true) // Бесконечный цикл
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
         {
-            // Проверяем, есть ли еще точки спауна
-            if (spawnPoints.Count == 0)
-            {
-                // Восстанавливаем точки спауна
-                spawnPoints = new List<Transform>(originalSpawnPoints);
-            }
-
-            for (int i = 0; i < balls.Length; i++)
-            {
-                if (i < spawnIntervals.Length)
-                {
-                    yield return new WaitForSeconds(spawnIntervals[i]);
-
-                    if (spawnPoints.Count > 0)
-                    {
-                        var spawn = Random.Range(0, spawnPoints.Count);
-                        GameObject ball = Instantiate(balls[i], spawnPoints[spawn].transform.position, Quaternion.identity);
-                        DestroyOffScreen(ball); // Проверяем, если объект должен быть удален
-                        spawnPoints.RemoveAt(spawn);
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("Не указаны интервалы спауна для всех шаров.");
-                    yield break;
-                }
-            }
+            Debug.LogError("Объект с тегом 'Player' не найден на сцене.");
         }
+
+        StartCoroutine(SpawnPrefab());
     }
 
-    private void DestroyOffScreen(GameObject obj)
-    {
-        StartCoroutine(CheckAndDestroy(obj));
-    }
-
-    IEnumerator CheckAndDestroy(GameObject obj)
+    IEnumerator SpawnPrefab()
     {
         while (true)
         {
-            if (player != null)
+            // Проверяем, пересёк ли игрок заданную высоту
+            if (player != null && player.transform.position.y >= spawnHeightThreshold)
             {
-                float playerY = player.transform.position.y;
-                float objectY = obj.transform.position.y;
+                // Ждём случайное количество времени между minSpawnInterval и maxSpawnInterval
+                float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+                yield return new WaitForSeconds(waitTime);
 
-                if (objectY < playerY - distanceBelowPlayer)
-                {
-                    Destroy(obj);
-                    yield break;
-                }
+                // Выбираем случайную точку спавна
+                int randomSpawnIndex = Random.Range(0, spawnPoints.Length);
+                Transform spawnPoint = spawnPoints[randomSpawnIndex];
+
+                // Выбираем случайный префаб для спавна
+                int randomPrefabIndex = Random.Range(0, prefabsToSpawn.Length);
+                GameObject prefabToSpawn = prefabsToSpawn[randomPrefabIndex];
+
+                // Спавним выбранный префаб
+                GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+
+                // Запускаем корутину для отслеживания объекта и его удаления
+                StartCoroutine(CheckAndDestroyPrefab(spawnedObject));
             }
-            yield return new WaitForSeconds(1f); // Проверяем раз в секунду
+
+            // Ждём один кадр перед следующей проверкой
+            yield return null;
+        }
+    }
+
+    IEnumerator CheckAndDestroyPrefab(GameObject spawnedObject)
+    {
+        while (spawnedObject != null)
+        {
+            if (player != null && spawnedObject.transform.position.y < player.transform.position.y - destroyDistance)
+            {
+                // Удаляем объект, если он находится ниже определённого расстояния от игрока
+                Destroy(spawnedObject);
+            }
+
+            // Ждём следующий кадр перед проверкой
+            yield return null;
         }
     }
 }

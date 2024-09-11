@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6728458391977383004}
   m_Layer: 0
   m_Name: Fx_01_0
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enginePower: 1
   _forceMode: 1
+  _maxSpeed: 10
 --- !u!114 &1739792246801268078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,3 +248,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d514a2a9c35270e418fe20700dc9bb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 5
