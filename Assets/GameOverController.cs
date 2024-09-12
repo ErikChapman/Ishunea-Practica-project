@@ -1,25 +1,26 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameOverController : MonoBehaviour
+public class PlayerCollision : MonoBehaviour
 {
-    public Text gameOverText; // Drag the Text UI element here in the Inspector
+    public GameObject gameOverTextPrefab;  // Префаб надписи "Game Over"
+    public Transform spawnPoint;  // Точка спавна для надписи "Game Over"
+    public GameObject[] enemyPrefabs;  // Префабы, столкновение с которыми приведет к "Game Over"
 
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Скрываем текст в начале
-        gameOverText.gameObject.SetActive(false);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Проверяем, что объект, с которым произошло столкновение, имеет тег "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        // Проверяем, совпадает ли объект, с которым столкнулся игрок, с одним из указанных префабов
+        foreach (GameObject enemyPrefab in enemyPrefabs)
         {
-            // Отображаем текст "Проигрыш"
-            gameOverText.gameObject.SetActive(true);
-            // Останавливаем игру
-            Time.timeScale = 0f;
+            if (collision.gameObject.name.Contains(enemyPrefab.name))
+            {
+                // Останавливаем игру
+                Time.timeScale = 0;
+
+                // Спавним надпись "Game Over" в указанной точке
+                Instantiate(gameOverTextPrefab, spawnPoint.position, Quaternion.identity);
+
+                break;
+            }
         }
     }
 }

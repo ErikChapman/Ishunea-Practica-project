@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -2981729038763996951}
   - component: {fileID: 7039014998857026776}
   - component: {fileID: -8631019094874400849}
-  - component: {fileID: -8098546010610217944}
   m_Layer: 0
   m_Name: Asteroids_Foreground_2
   m_TagString: Untagged
@@ -206,15 +205,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-8098546010610217944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2576825470669935060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85061765b747af4b98633f553fea494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
