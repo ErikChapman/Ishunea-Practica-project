@@ -2,22 +2,34 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public GameObject gameOverTextPrefab;  // Префаб надписи "Game Over"
-    public Transform spawnPoint;  // Точка спавна для надписи "Game Over"
-    public GameObject[] enemyPrefabs;  // Префабы, столкновение с которыми приведет к "Game Over"
+    public Canvas gameOverCanvas;  // Ссылка на Canvas с экраном смерти
+    public GameObject[] enemyPrefabs;  // Префабы врагов, столкновение с которыми вызовет "Game Over"
+    public Canvas[] otherCanvases;  // Канвасы, которые нужно скрыть при активации "Game Over"
+
+    private void Start()
+    {
+        // Убеждаемся, что Canvas с экраном смерти выключен в начале игры
+        gameOverCanvas.gameObject.SetActive(false);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Проверяем, совпадает ли объект, с которым столкнулся игрок, с одним из указанных префабов
+        // Проверяем, столкнулся ли игрок с объектом, который является врагом
         foreach (GameObject enemyPrefab in enemyPrefabs)
         {
             if (collision.gameObject.name.Contains(enemyPrefab.name))
             {
                 // Останавливаем игру
-                Time.timeScale = 0;
+                Time.timeScale = 0f;
 
-                // Спавним надпись "Game Over" в указанной точке
-                Instantiate(gameOverTextPrefab, spawnPoint.position, Quaternion.identity);
+                // Включаем Canvas с экраном смерти
+                gameOverCanvas.gameObject.SetActive(true);
+
+                // Скрываем все другие канвасы
+                foreach (Canvas canvas in otherCanvases)
+                {
+                    canvas.gameObject.SetActive(false);
+                }
 
                 break;
             }
