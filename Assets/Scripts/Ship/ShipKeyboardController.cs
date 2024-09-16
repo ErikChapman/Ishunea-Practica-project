@@ -18,6 +18,8 @@ public class ShipKeyboardController : MonoBehaviour
     public AudioSource EngineAudio; // Аудио для двигателя
     public AudioSource ShootAudio; // Аудио для выстрела
 
+    public float _targetHeight = 10f;  // Целевая высота
+
     void Start()
     {
         _engineController = GetComponent<EngineController>();
@@ -57,7 +59,8 @@ public class ShipKeyboardController : MonoBehaviour
         else if (Input.GetKey(_rightKey))
             _rotateController.RotateRight();
 
-        if (Input.GetKey(_engineKey))
+        // Проверка высоты корабля
+        if (transform.position.y >= _targetHeight || Input.GetKey(_engineKey))
         {
             _engineController.AddForce();
             if (!EngineAudio.isPlaying)

@@ -7,10 +7,18 @@ public class AsteroidCollision : MonoBehaviour
     public bool Contact { get; private set; } = false; // Параметр контакта
     public float destroyDelay = 0.5f; // Настраиваемая задержка удаления
 
+    public AudioSource audioSource; // Публичная переменная для AudioSource
+
     void Start()
     {
         animator = GetComponent<Animator>(); // Получаем компонент Animator
         asteroidCollider = GetComponent<Collider2D>(); // Получаем компонент Collider2D
+
+        // Если AudioSource не привязан в инспекторе, пробуем найти его на объекте
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -20,6 +28,12 @@ public class AsteroidCollision : MonoBehaviour
             Contact = true; // Устанавливаем параметр контакта в true
             animator.SetTrigger("PlayAnimation"); // Запуск анимации
             asteroidCollider.enabled = false; // Отключаем коллайдер
+
+            // Проигрываем звук через публичный AudioSource, если он привязан
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
 
             HitCounter.instance.AddHit();
             Destroy(collision.gameObject); // Удаление пули

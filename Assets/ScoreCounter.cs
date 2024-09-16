@@ -1,12 +1,12 @@
 using UnityEngine;
-using TMPro; // Для работы с TextMeshPro
+using UnityEngine.UI; // Для работы с обычным текстом
 
 public class HitCounter : MonoBehaviour
 {
     public static HitCounter instance; // Статический экземпляр для доступа
-    public TextMeshProUGUI hitCountText; // TMP для текущего счёта
-    public TextMeshProUGUI bestScoreText; // TMP для лучшего счёта
-    public TextMeshProUGUI altitudeText; // TMP для отображения высоты
+    public Text hitCountText; // Обычный текст для текущего счёта
+    public Text bestScoreText; // Обычный текст для лучшего счёта
+    public Text altitudeText; // Обычный текст для отображения высоты
     public Transform player; // Ссылка на объект игрока
 
     private int asteroidHitCount = 0; // Счётчик попаданий
@@ -50,7 +50,7 @@ public class HitCounter : MonoBehaviour
         asteroidHitCount++; // Увеличиваем счётчик
         UpdateHitCount(); // Обновляем текстовое поле
 
-        // Проверяем, если текущий счёт больше лучшег
+        // Проверяем, если текущий счёт больше лучшего
         if (asteroidHitCount > bestScore)
         {
             bestScore = asteroidHitCount;

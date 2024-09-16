@@ -34,6 +34,6 @@ public class EngineController : MonoBehaviour
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _maxSpeed;
         }
         // Вывод текущей скорости в консоль
-        Debug.Log($"Current Speed: {_rigidbody2D.velocity.magnitude}");
+        //Debug.Log($"Current Speed: {_rigidbody2D.velocity.magnitude}");
     }
 }
