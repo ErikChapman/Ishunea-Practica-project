@@ -15,12 +15,17 @@ public class RandomSpawner : MonoBehaviour
     public float maxHeight = 100f; // Максимальная высота
 
     public Canvas gameOverCanvas; // Канвас для отображения при завершении игры
+    public Image hpBar; // Полоска здоровья
+    public float maxHP = 100f; // Максимальное здоровье
+    private float currentHP; // Текущее здоровье
 
     private GameObject player;
     private int destroyedObjectCount = 0; // Счётчик удалённых объектов
 
     private void Start()
     {
+        currentHP = maxHP; // Устанавливаем текущее здоровье на максимум в начале игры
+
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
@@ -81,16 +86,27 @@ public class RandomSpawner : MonoBehaviour
                 Destroy(spawnedObject);
                 destroyedObjectCount++; // Увеличиваем счётчик удалённых объектов
 
-                // Проверяем, достиг ли счётчик 3
-                if (destroyedObjectCount >= 3)
+                // Уменьшаем здоровье
+                currentHP -= 33; // Например, вычитаем 10 единиц здоровья за каждый удалённый объект
+                hpBar.fillAmount = currentHP / maxHP; // Обновляем заполнение полоски здоровья
+
+                // Проверяем, если здоровье закончилось, завершаем игру
+                if (currentHP <= 0)
                 {
                     // Останавливаем игру и отображаем канвас завершения игры
                     if (gameOverCanvas != null)
                     {
                         gameOverCanvas.gameObject.SetActive(true);
                         Time.timeScale = 0f;
-                        // Отключаем спавн
-                        //StopCoroutine(SpawnPrefab());
+                    }
+                }
+                // Если объект был удалён 3 раза, также завершаем игру
+                if (destroyedObjectCount >= 3)
+                {
+                    if (gameOverCanvas != null)
+                    {
+                        gameOverCanvas.gameObject.SetActive(true);
+                        Time.timeScale = 0f;
                     }
                 }
             }
