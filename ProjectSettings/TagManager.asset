@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Asteroid
+  - Undefined
+  - Bonus
   layers:
   - Default
   - TransparentFX
