@@ -15,6 +15,9 @@ public class BonusSpawner : MonoBehaviour
     // Время задержки перед началом спавна
     public float startDelay = 5f;
 
+    // Ссылка на игрока
+    public Transform player;
+
     void Start()
     {
         // Начинаем спавн бонусов с заданной задержкой и интервалом
@@ -37,6 +40,24 @@ public class BonusSpawner : MonoBehaviour
         GameObject bonusPrefab = bonusPrefabs[Random.Range(0, bonusPrefabs.Length)];
 
         // Спавним бонус на выбранной точке
-        Instantiate(bonusPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject spawnedBonus = Instantiate(bonusPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        // Запускаем корутину для проверки, когда бонус ниже игрока
+        StartCoroutine(CheckBonusPosition(spawnedBonus));
+    }
+
+    IEnumerator CheckBonusPosition(GameObject bonus)
+    {
+        // Проверяем, не упал ли бонус на 10 единиц ниже игрока
+        while (bonus != null)
+        {
+            if (bonus.transform.position.y < player.position.y - 10f)
+            {
+                Destroy(bonus); // Удаляем бонус
+                yield break; // Останавливаем корутину
+            }
+
+            yield return null; // Ждем следующий кадр
+        }
     }
 }

@@ -17,7 +17,7 @@ public class RandomSpawner : MonoBehaviour
     public Canvas gameOverCanvas; // Канвас для отображения при завершении игры
     public Image hpBar; // Полоска здоровья
     public float maxHP = 100f; // Максимальное здоровье
-    private float currentHP; // Текущее здоровье
+    public float currentHP; // Текущее здоровье
 
     private GameObject player;
     private int destroyedObjectCount = 0; // Счётчик удалённых объектов
@@ -101,14 +101,14 @@ public class RandomSpawner : MonoBehaviour
                     }
                 }
                 // Если объект был удалён 3 раза, также завершаем игру
-                if (destroyedObjectCount >= 3)
-                {
-                    if (gameOverCanvas != null)
-                    {
-                        gameOverCanvas.gameObject.SetActive(true);
-                        Time.timeScale = 0f;
-                    }
-                }
+                //if (destroyedObjectCount >= 3)
+                //{
+                //    if (gameOverCanvas != null)
+                //    {
+                //        gameOverCanvas.gameObject.SetActive(true);
+                //        Time.timeScale = 0f;
+                //    }
+                //}
             }
 
             // Ждём следующий кадр перед проверкой

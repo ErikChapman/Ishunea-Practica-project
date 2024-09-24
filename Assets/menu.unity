@@ -9651,6 +9651,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 1412285911}
   hpBar: {fileID: 211912727}
   maxHP: 100
+  currentHP: 0
 --- !u!4 &1712863162
 Transform:
   m_ObjectHideFlags: 0
@@ -9693,6 +9694,7 @@ MonoBehaviour:
   - {fileID: 1619229911}
   spawnInterval: 10
   startDelay: 10
+  player: {fileID: 675499252}
 --- !u!1 &1777540296
 GameObject:
   m_ObjectHideFlags: 0
