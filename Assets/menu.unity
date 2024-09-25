@@ -6713,6 +6713,7 @@ MonoBehaviour:
   bestScoreText: {fileID: 1915873750}
   altitudeText: {fileID: 815862509}
   player: {fileID: 675499252}
+  scoreMultiplier: 1
 --- !u!1 &1155701256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9686,14 +9687,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusPrefabs:
   - {fileID: 2478192196783871725, guid: 91014c7b55674a7438d60461ba4d5bde, type: 3}
+  - {fileID: 7726316644540328040, guid: 2155197239a40df4aa6200a0cca4f4b2, type: 3}
   spawnPoints:
   - {fileID: 292101522}
   - {fileID: 825287556}
   - {fileID: 71220186}
   - {fileID: 642635373}
   - {fileID: 1619229911}
-  spawnInterval: 10
-  startDelay: 10
+  spawnInterval: 30
+  spawnStartHeight: 20
   player: {fileID: 675499252}
 --- !u!1 &1777540296
 GameObject:

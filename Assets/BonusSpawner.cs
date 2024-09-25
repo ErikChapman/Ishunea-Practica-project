@@ -12,16 +12,28 @@ public class BonusSpawner : MonoBehaviour
     // Интервал между спавнами бонусов
     public float spawnInterval = 10f;
 
-    // Время задержки перед началом спавна
-    public float startDelay = 5f;
+    // Высота, с которой начинается спавн бонусов
+    public float spawnStartHeight = 50f;
 
     // Ссылка на игрока
     public Transform player;
 
-    void Start()
+    private bool canSpawnBonuses = false; // Флаг для проверки, можно ли спавнить бонусы
+
+    void Update()
     {
-        // Начинаем спавн бонусов с заданной задержкой и интервалом
-        InvokeRepeating("SpawnBonus", startDelay, spawnInterval);
+        // Если высота игрока превышает нужную высоту для начала спавна
+        if (player.position.y >= spawnStartHeight && !canSpawnBonuses)
+        {
+            canSpawnBonuses = true;
+            StartSpawning(); // Начинаем спавнить бонусы
+        }
+    }
+
+    void StartSpawning()
+    {
+        // Начинаем спавн бонусов с заданным интервалом
+        InvokeRepeating("SpawnBonus", 0f, spawnInterval);
     }
 
     void SpawnBonus()

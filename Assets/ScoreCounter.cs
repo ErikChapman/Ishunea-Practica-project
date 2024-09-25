@@ -1,42 +1,42 @@
 using UnityEngine;
-using UnityEngine.UI; // Для работы с обычным текстом
+using UnityEngine.UI; 
 
 public class HitCounter : MonoBehaviour
 {
     public static HitCounter instance; // Статический экземпляр для доступа
-    public Text hitCountText; // Обычный текст для текущего счёта
-    public Text bestScoreText; // Обычный текст для лучшего счёта
-    public Text altitudeText; // Обычный текст для отображения высоты
-    public Transform player; // Ссылка на объект игрока
+    public Text hitCountText;
+    public Text bestScoreText;
+    public Text altitudeText;
+    public Transform player;
 
     private int asteroidHitCount = 0; // Счётчик попаданий
-    private int bestScore = 0; // Лучший счёт
-    private const float heightCorrection = 4.14f; // Значение для коррекции высоты
+    private int bestScore = 0;
+    private const float heightCorrection = 4.14f;
+
+    // Переменная для множителя очков
+    public float scoreMultiplier = 1f;
 
     void Awake()
     {
-        // Устанавливаем Singleton, чтобы этот скрипт был доступен в любом месте
         if (instance == null)
         {
             instance = this;
         }
         else
         {
-            Destroy(gameObject); // Удаляем дубликаты
+            Destroy(gameObject);
         }
     }
 
     void Start()
     {
-        // Загружаем лучший счёт, если он есть
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
-        UpdateBestScore(); // Обновляем отображение лучшего счёта
-        UpdateHitCount();  // Обновляем текст текущего счёта
+        UpdateBestScore();
+        UpdateHitCount();
     }
 
     void Update()
     {
-        // Обновляем текстовое поле с текущей высотой игрока с коррекцией
         if (player != null)
         {
             float correctedHeight = player.position.y + heightCorrection;
@@ -44,41 +44,36 @@ public class HitCounter : MonoBehaviour
         }
     }
 
-    // Метод для увеличения счётчика попаданий
     public void AddHit()
     {
-        asteroidHitCount++; // Увеличиваем счётчик
-        UpdateHitCount(); // Обновляем текстовое поле
+        // Увеличиваем счётчик с учётом множителя
+        asteroidHitCount += Mathf.RoundToInt(1 * scoreMultiplier);
+        UpdateHitCount();
 
-        // Проверяем, если текущий счёт больше лучшего
         if (asteroidHitCount > bestScore)
         {
             bestScore = asteroidHitCount;
-            SaveBestScore(); // Сохраняем новый лучший счёт
-            UpdateBestScore(); // Обновляем отображение лучшего счёта
+            SaveBestScore();
+            UpdateBestScore();
         }
     }
 
-    // Обновление текстового поля для текущего счёта
     void UpdateHitCount()
     {
         hitCountText.text = "Hits: " + asteroidHitCount.ToString();
     }
 
-    // Сохранение лучшего счёта в PlayerPrefs
     void SaveBestScore()
     {
-        PlayerPrefs.SetInt("BestScore", bestScore); // Сохраняем лучший счёт
-        PlayerPrefs.Save(); // Сохраняем изменения на диск
+        PlayerPrefs.SetInt("BestScore", bestScore);
+        PlayerPrefs.Save();
     }
 
-    // Обновление текстового поля для лучшего счёта
     void UpdateBestScore()
     {
         bestScoreText.text = "Best Score: " + bestScore.ToString();
     }
 
-    // Метод для сброса текущего счёта (если нужно)
     public void ResetScore()
     {
         asteroidHitCount = 0;

@@ -18,7 +18,7 @@ public class Bonus : MonoBehaviour
             if (randomSpawner != null)
             {
                 // Увеличиваем HP
-                randomSpawner.currentHP += 33;
+                randomSpawner.currentHP += 34;
 
                 // Убедитесь, что HP не превышает максимум
                 if (randomSpawner.currentHP > randomSpawner.maxHP)
