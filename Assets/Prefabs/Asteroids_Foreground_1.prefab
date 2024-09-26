@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4284151286320906577}
   m_Layer: 0
   m_Name: Asteroids_Foreground_1
-  m_TagString: Untagged
+  m_TagString: SpawnedPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

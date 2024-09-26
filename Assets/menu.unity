@@ -1278,7 +1278,6 @@ GameObject:
   - component: {fileID: 211912724}
   - component: {fileID: 211912728}
   - component: {fileID: 211912727}
-  - component: {fileID: 211912726}
   m_Layer: 5
   m_Name: hp
   m_TagString: Untagged
@@ -1305,18 +1304,6 @@ RectTransform:
   m_AnchoredPosition: {x: -678, y: 493}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &211912726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211912723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01fd03998992b5b419a7f8826b8e5acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &211912727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,7 +3826,6 @@ GameObject:
   - component: {fileID: 675499256}
   - component: {fileID: 675499258}
   - component: {fileID: 675499255}
-  - component: {fileID: 675499259}
   - component: {fileID: 675499260}
   - component: {fileID: 675499261}
   - component: {fileID: 675499262}
@@ -4059,18 +4045,6 @@ MonoBehaviour:
   EngineAudio: {fileID: 450189014}
   ShootAudio: {fileID: 742976182}
   _targetHeight: 7
---- !u!114 &675499259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675499248}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99195b8fd9909c14c92e700267e0ac00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &675499260
 Animator:
   serializedVersion: 5
@@ -9688,6 +9662,7 @@ MonoBehaviour:
   bonusPrefabs:
   - {fileID: 2478192196783871725, guid: 91014c7b55674a7438d60461ba4d5bde, type: 3}
   - {fileID: 7726316644540328040, guid: 2155197239a40df4aa6200a0cca4f4b2, type: 3}
+  - {fileID: 6240120889723531613, guid: 8005244ec1e146f48ac821367857388a, type: 3}
   spawnPoints:
   - {fileID: 292101522}
   - {fileID: 825287556}

@@ -97,22 +97,23 @@ public class RandomSpawner : MonoBehaviour
                     if (gameOverCanvas != null)
                     {
                         gameOverCanvas.gameObject.SetActive(true);
+                        DestroyAllPrefabs(); // Удаляем все префабы с экрана
                         Time.timeScale = 0f;
                     }
                 }
-                // Если объект был удалён 3 раза, также завершаем игру
-                //if (destroyedObjectCount >= 3)
-                //{
-                //    if (gameOverCanvas != null)
-                //    {
-                //        gameOverCanvas.gameObject.SetActive(true);
-                //        Time.timeScale = 0f;
-                //    }
-                //}
             }
 
             // Ждём следующий кадр перед проверкой
             yield return null;
+        }
+    }
+
+    // Метод для удаления всех префабов с экрана
+    private void DestroyAllPrefabs()
+    {
+        foreach (GameObject prefab in GameObject.FindGameObjectsWithTag("SpawnedPrefab"))
+        {
+            Destroy(prefab);
         }
     }
 }

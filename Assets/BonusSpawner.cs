@@ -60,13 +60,24 @@ public class BonusSpawner : MonoBehaviour
 
     IEnumerator CheckBonusPosition(GameObject bonus)
     {
+        float timeBelowPlayer = 0f; // Время, которое бонус находится ниже игрока
+
         // Проверяем, не упал ли бонус на 10 единиц ниже игрока
         while (bonus != null)
         {
             if (bonus.transform.position.y < player.position.y - 10f)
             {
-                Destroy(bonus); // Удаляем бонус
-                yield break; // Останавливаем корутину
+                timeBelowPlayer += Time.deltaTime; // Увеличиваем таймер на время прошедшего кадра
+
+                if (timeBelowPlayer >= 8f) // Если бонус находится ниже игрока более 8 секунд
+                {
+                    Destroy(bonus); // Удаляем бонус
+                    yield break; // Останавливаем корутину
+                }
+            }
+            else
+            {
+                timeBelowPlayer = 0f; // Сбрасываем таймер, если бонус поднялся выше 10 единиц ниже игрока
             }
 
             yield return null; // Ждем следующий кадр

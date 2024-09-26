@@ -20,6 +20,7 @@ public class PlayerCollision : MonoBehaviour
             if (collision.gameObject.name.Contains(enemyPrefab.name))
             {
                 // Останавливаем игру
+                DestroyAllPrefabs();
                 Time.timeScale = 0f;
 
                 // Включаем Canvas с экраном смерти
@@ -33,6 +34,16 @@ public class PlayerCollision : MonoBehaviour
 
                 break;
             }
+        }
+    }
+
+
+
+    private void DestroyAllPrefabs()
+    {
+        foreach (GameObject prefab in GameObject.FindGameObjectsWithTag("SpawnedPrefab"))
+        {
+            Destroy(prefab);
         }
     }
 }
