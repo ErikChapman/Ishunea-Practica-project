@@ -48,10 +48,4 @@ public class GameOverOnAsteroidBelow : MonoBehaviour
             }
         }
     }
-
-    void GameOver()
-    {
-        // Ваш код для окончания игры
-        Debug.Log("Game Over");
-    }
 }

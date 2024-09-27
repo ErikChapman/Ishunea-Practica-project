@@ -6,14 +6,16 @@ public class BonusSpawner : MonoBehaviour
     // Массив бонусных префабов (например, быстрая стрельба, лазеры)
     public GameObject[] bonusPrefabs;
 
-    // Массив точек спавна бонусов
-    public Transform[] spawnPoints;
+
 
     // Интервал между спавнами бонусов
     public float spawnInterval = 10f;
 
     // Высота, с которой начинается спавн бонусов
     public float spawnStartHeight = 50f;
+
+    // Массив точек спавна бонусов
+    public Transform[] spawnPoints;
 
     // Ссылка на игрока
     public Transform player;
@@ -28,12 +30,6 @@ public class BonusSpawner : MonoBehaviour
             canSpawnBonuses = true;
             StartSpawning(); // Начинаем спавнить бонусы
         }
-    }
-
-    void StartSpawning()
-    {
-        // Начинаем спавн бонусов с заданным интервалом
-        InvokeRepeating("SpawnBonus", 0f, spawnInterval);
     }
 
     void SpawnBonus()
@@ -57,6 +53,14 @@ public class BonusSpawner : MonoBehaviour
         // Запускаем корутину для проверки, когда бонус ниже игрока
         StartCoroutine(CheckBonusPosition(spawnedBonus));
     }
+
+    void StartSpawning()
+    {
+        // Начинаем спавн бонусов с заданным интервалом
+        InvokeRepeating("SpawnBonus", 0f, spawnInterval);
+    }
+
+    
 
     IEnumerator CheckBonusPosition(GameObject bonus)
     {
