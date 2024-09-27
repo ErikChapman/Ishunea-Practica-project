@@ -2877,7 +2877,6 @@ Transform:
   - {fileID: 2055380726}
   - {fileID: 24058107}
   - {fileID: 1712863162}
-  - {fileID: 1834230996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
@@ -9663,14 +9662,14 @@ MonoBehaviour:
   - {fileID: 2478192196783871725, guid: 91014c7b55674a7438d60461ba4d5bde, type: 3}
   - {fileID: 7726316644540328040, guid: 2155197239a40df4aa6200a0cca4f4b2, type: 3}
   - {fileID: 6240120889723531613, guid: 8005244ec1e146f48ac821367857388a, type: 3}
+  spawnInterval: 30
+  spawnStartHeight: 20
   spawnPoints:
   - {fileID: 292101522}
   - {fileID: 825287556}
   - {fileID: 71220186}
   - {fileID: 642635373}
   - {fileID: 1619229911}
-  spawnInterval: 30
-  spawnStartHeight: 20
   player: {fileID: 675499252}
 --- !u!1 &1777540296
 GameObject:
@@ -10089,37 +10088,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829736148}
   m_CullTransparentMesh: 1
---- !u!1 &1834230995
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1834230996}
-  m_Layer: 0
-  m_Name: 'spawn dead screen '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1834230996
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834230995}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 519420032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878140500
 GameObject:
   m_ObjectHideFlags: 0
